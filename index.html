@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost#Code | Digital Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #020202;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* СЕКЦИЯ 1: ГЛАВНАЯ */
+        .hero-section {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 255, 200, 0.05) 0%, transparent 70%);
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -4px;
+            background: linear-gradient(90deg, #00ffc8, #008cff, #00ffc8);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 200, 0.3));
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            color: #00ffc8;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* СЕКЦИЯ 2: КОНТЕНТ */
+        .content-section {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px;
+            gap: 40px;
+        }
+
+        .glass-card {
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 255, 200, 0.2);
+            padding: clamp(30px, 5vw, 50px);
+            border-radius: 35px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(0, 255, 200, 0.1);
+            border: 1px solid rgba(0, 255, 200, 0.3);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: #00ffc8;
+        }
+
+        /* Блок ПОРТФОЛИО */
+        .portfolio-status {
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px dashed rgba(0, 255, 200, 0.3);
+        }
+
+        .portfolio-status h3 {
+            color: #00ffc8;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .portfolio-status p {
+            color: #bbb;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .btn-order {
+            display: inline-block;
+            margin-top: 40px;
+            background: #00ffc8;
+            color: #000;
+            text-decoration: none;
+            padding: 20px 50px;
+            border-radius: 18px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(0, 255, 200, 0.3);
+        }
+
+        .btn-order:hover {
+            transform: scale(1.05);
+            background: #fff;
+            box-shadow: 0 15px 45px rgba(0, 255, 200, 0.5);
+        }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas"></canvas>
+
+    <section class="hero-section">
+        <h1 class="hero-title">GHOST#CODE</h1>
+        <p style="color: #666; letter-spacing: 5px; margin-top: 10px;">SOFTWARE & WEB DEVELOPMENT</p>
+        <div class="scroll-down" onclick="window.scrollTo(0, window.innerHeight)">
+            ABOUT ME ↓
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="glass-card">
+            <h2 class="subtitle">Ghost#Code Lab</h2>
+            
+            <div class="tags">
+                <span class="tag">Telegram Bots</span>
+                <span class="tag">Websites</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Free for Reviews</span>
+            </div>
+
+            <p style="color: #999; line-height: 1.8; font-size: 1.1rem; margin-bottom: 20px;">
+                Разрабатываю решения на Python (aiogram, telethon) и создаю стильные веб-интерфейсы. Работаю быстро, ценю четкость и прозрачность процесса.
+            </p>
+
+            <div class="portfolio-status">
+                <h3>Portfolio Status: Building...</h3>
+                <p>
+                    На данный момент я формирую портфолио и собираю отзывы. <br>
+                    <strong>Готов выполнить твой проект (бот или сайт) абсолютно бесплатно!</strong> <br>
+                    С тебя — интересная задача и честный отзыв по итогу работы.
+                </p>
+            </div>
+
+            <a href="https://t.me/ghostpyt" class="btn-order">ЗАКАЗАТЬ БЕСПЛАТНО</a>
+            
+            <p class="footer">STAY GHOST | SAINT PETERSBURG | 2026</p>
+        </div>
+    </section>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.vx = (Math.random() - 0.5) * 1;
+                this.vy = (Math.random() - 0.5) * 1;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x > canvas.width || this.x < 0) this.vx *= -1;
+                if (this.y > canvas.height || this.y < 0) this.vy *= -1;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < mouse.radius) {
+                    this.x -= dx/20; this.y -= dy/20;
+                }
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(0, 255, 200, 0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            let count = (canvas.width * canvas.height) / 10000;
+            for (let i = 0; i < count; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            for(let i=0; i<particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for(let j=i; j<particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 150) {
+                        ctx.strokeStyle = `rgba(0, 255, 200, ${1 - dist/150})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        init(); animate();
+    </script>
+</body>
+</html>
